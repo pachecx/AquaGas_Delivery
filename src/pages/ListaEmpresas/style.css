@@ -1,0 +1,25 @@
+.container {
+  width: 100%;
+  /* height: 100%; */
+  height: 100vh;
+  background-image: conic-gradient(
+    from 0deg,
+    rgb(0, 213, 255),
+    rgba(0, 106, 255, 0.923),
+    rgb(0, 213, 255)
+  );
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-color: #ffffff;
+
+  /* background-image: conic-gradient(
+    from 0deg,
+    #ffffff,
+    rgba(119, 121, 123, 0.923),
+    #ffffff
+  );
+
+  background-color: #ffffff;  */
+
+ 
+}
