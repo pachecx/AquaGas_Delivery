@@ -4,6 +4,10 @@ import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
 import ListaEmpresas from "./pages/ListaEmpresas";
 import Login from "./pages/Login";
+import Cadastro from './pages/FormCadastro'
+import HomeEstabelecimento from "./pages/HomeEstabelecimento/index.tsx";
+import EditarEstabelecimento from "./pages/EditarEstabelecimento/index.tsx";
+import CadastrarProduto from "./pages/CadastrarProduto/index.tsx";
 import "./index.css";
 
 const router = createBrowserRouter([
@@ -18,6 +22,22 @@ const router = createBrowserRouter([
   {
     path: "/Login",
     element: <Login />,
+  },
+  {
+    path: "/Cadastro",
+    element: <Cadastro />,
+  },
+  {
+    path: "/homeEstabelecimento",
+    element: <HomeEstabelecimento />,
+  },
+  {
+    path: "/editarEstabelecimento",
+    element: <EditarEstabelecimento />,
+  },
+  {
+    path: "/cadastrarProduto",
+    element: <CadastrarProduto />,
   },
 ]);
 
