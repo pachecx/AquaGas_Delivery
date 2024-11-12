@@ -1,8 +1,28 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "../ListaEmpresas/style.css";
+import { useState } from "react";
 
 const Login = () => {
+  const [dados, setDados] = useState({});
+
+  const handleLogar = (e) => {
+    const { name, value } = e.target;
+
+    setDados((prev) => {
+      const newDados = { ...prev, [name]: value };
+
+      return newDados;
+    });
+  };
+
+  const Logar = (e) => {
+    e.preventDefault()
+
+    console.log('login', dados)
+  };
+
+
   return (
     <div className="container px-3 pt-24">
       <div
@@ -13,7 +33,7 @@ const Login = () => {
           <span>Login</span>
         </h1>
 
-        <form className="text-gray-700">
+        <form onSubmit={Logar} className="text-gray-700">
           <label
             htmlFor="email"
             className="text-xs font-bold after:content-['*']"
@@ -22,6 +42,8 @@ const Login = () => {
           </label>
           <input
             required
+            onChange={handleLogar}
+            name="email"
             type="email"
             className="w-full p-2 mb-2 mt-1 outline-none ring-none focus:ring-2 focus:ring-sky-500"
           />
@@ -33,10 +55,13 @@ const Login = () => {
           </label>
           <input
             required
+            onChange={handleLogar}
+            name="senha"
             type="password"
+            minLength={6}
             className="w-full p-2 mb-2 mt-1 outline-none ring-none focus:ring-2 focus:ring-sky-500"
           />
-          <Link className="block text-right text-xs text-white mb-4" to="#">
+          <Link className="block text-right text-xs text-white mb-4" to="/esqueceusenha">
             Esqueceu senha?
           </Link>
           <button className="w-full rounded bg-sky-500 text-sky-50 p-2 text-center font-bold hover:bg-sky-400">
@@ -48,7 +73,7 @@ const Login = () => {
           Não possui conta?
           <Link
             className="ml-1 block font-sans text-sm font-bold leading-normal text-white antialiased"
-            to={'/Cadastro'}
+            to={"/Cadastro"}
           >
             Cadastre-se
           </Link>

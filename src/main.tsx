@@ -8,6 +8,7 @@ import Cadastro from './pages/FormCadastro'
 import HomeEstabelecimento from "./pages/HomeEstabelecimento/index.tsx";
 import EditarEstabelecimento from "./pages/EditarEstabelecimento/index.tsx";
 import CadastrarProduto from "./pages/CadastrarProduto/index.tsx";
+import EsqueceuSenha from "./pages/EsqueceuSenha/index.tsx";
 import "./index.css";
 
 const router = createBrowserRouter([
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
   {
     path: "/cadastrarProduto",
     element: <CadastrarProduto />,
+  },
+  {
+    path: "/esqueceusenha",
+    element: <EsqueceuSenha />,
   },
 ]);
 
