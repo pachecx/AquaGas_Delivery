@@ -11,13 +11,22 @@ const CadastrarProduto = () => {
         </div>
 
         <div className="flex flex-col">
-          <label htmlFor="volume">volume</label>
+          <label htmlFor="volume">volume ou peso</label>
           <input className="border" type="text" name="volume" placeholder="Ex: 5L"/>
         </div>
 
         <div className="flex flex-col">
           <label htmlFor="valor">Valor</label>
           <input className="border" type="text" name="valor" />
+        </div>
+
+        <div className="flex flex-col">
+          <p >Adicione uma Foto</p>
+          <label>Agua</label>
+          <input className="border"  type="radio" name="aguagas" />
+          <label>Gás</label>
+          <input className="border"  type="radio" name="aguagas" />
+
         </div>
 
         <div className="flex flex-col">
