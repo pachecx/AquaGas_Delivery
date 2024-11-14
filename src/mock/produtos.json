@@ -1,0 +1,41 @@
+[
+  {
+    "id": "01",
+    "nome": "agua do ze",
+    "produtos": ["agua, gas"],
+    "valorAgua": "6,00",
+    "valorgas": "90,00"
+  },
+
+  {
+    "id": "02",
+    "nome": "agua do chico",
+    "produtos": ["agua"],
+    "valorAgua": "7,00",
+    "valorgas": "92,00"
+  },
+
+  {
+    "id": "03",
+    "nome": "Casa da agua",
+    "produtos": ["agua, gas"],
+    "valorAgua": "8,00",
+    "valorgas": "100,00"
+  },
+
+  {
+    "id": "04",
+    "nome": "so agua",
+    "produtos": ["agua, gas"],
+    "valorAgua": "5,00",
+    "valorgas": "95,00"
+  },
+
+  {
+    "id": "05",
+    "nome": "fonte mineral",
+    "produtos": ["agua, gas"],
+    "valorAgua": "6,50",
+    "valorgas": "99,00"
+  }
+]

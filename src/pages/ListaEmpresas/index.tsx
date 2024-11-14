@@ -1,17 +1,33 @@
-import React from "react";
-import { CiSearch } from "react-icons/ci";
-import { IoStorefrontOutline } from "react-icons/io5";
+import React, { useEffect, useState } from "react";
 import Garrafao from "../../assets/garrafao.png";
 
 import { TbBottle } from "react-icons/tb";
 
 import { FaMapMarkerAlt } from "react-icons/fa";
 
-import LupaSvg from "../../assets/lupa.svg";
+import produtos from "../../mock/produtos.json";
 
 import "./style.css";
 
+interface PropsProdutos {
+  id: string;
+  nome: string;
+  produtos: string[];
+}
+
 const ListaEmpresas = () => {
+  const [data, setData] = useState<PropsProdutos[]>();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setData(produtos);
+
+      console.log(data);
+    };
+    fetchData();
+  }, [data]);
+  console.log(data);
+
   return (
     <div className="container">
       <header className="mb-10 pt-6 pl-3">
@@ -29,14 +45,40 @@ const ListaEmpresas = () => {
             </svg>
           </div>
           <input
-          placeholder="Procurar empresa"
+            placeholder="Procurar empresa"
             type="text"
             className="outline-none text-[20px] bg-transparent w-full text-black font-normal px-4"
           />
         </div>
       </header>
       <main className="px-3">
-        <div className="rounded  border bg-white flex flex-row items-center justify-between p-3">
+
+        {produtos.map((produto) => (
+
+<div key={produto.id} className="rounded  border bg-white flex flex-row items-center justify-between p-3 mb-2">
+<div>
+  <h2 className="font-inter">{produto.nome}</h2>
+  <p>Valor: {produto.valorAgua}</p>
+
+  <div className="flex flex-row gap-1 items-center">
+    <p>Avaliação: ****</p>
+
+    <div className="flex flex-row gap-1 items-center">
+      <FaMapMarkerAlt className="text-red-500" />
+      <p className="text-xs">2.5 km</p>
+    </div>
+  </div>
+</div>
+<div className="flex flex-col items-center gap-1">
+  <img className=" w-8" src={Garrafao} />
+  <button className="flex flex-row items-center rounded bg-sky-500 text-white px-1">
+    Pedir
+    <TbBottle />
+  </button>
+</div>
+</div>
+        ))}
+        {/* <div className="rounded  border bg-white flex flex-row items-center justify-between p-3">
           <div>
             <h2 className="font-inter">Nome da empresa</h2>
             <p>Valor: 6,00</p>
@@ -45,7 +87,7 @@ const ListaEmpresas = () => {
               <p>Avaliação: ****</p>
 
               <div className="flex flex-row gap-1 items-center">
-                <FaMapMarkerAlt className="text-red-500"/>
+                <FaMapMarkerAlt className="text-red-500" />
                 <p className="text-xs">2.5 km</p>
               </div>
             </div>
@@ -57,7 +99,7 @@ const ListaEmpresas = () => {
               <TbBottle />
             </button>
           </div>
-        </div>
+        </div> */}
       </main>
     </div>
   );

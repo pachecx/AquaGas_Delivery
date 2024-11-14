@@ -16,13 +16,24 @@ const DetalhesPedidos = () => {
             </div>
 
             <div>
-                <label htmlFor="comentario">Cometário</label>
-                <input type="text" placeholder="adicionar comentário"/>
-            </ div>
+              <p>Pagamento</p>
+              <div>
+                <input type="radio" name="contact" value="dinhero" />
+                <label htmlFor="dinheiro">Dinheiro</label>
+              </div>
+
+              <div>
+                <input type="radio" name="contact" value="cartao" />
+                <label htmlFor="cartao">Cartão</label>
+              </div>
+            </div>
+
+            <div>
+              <label htmlFor="comentario">Cometário</label>
+              <input type="text" placeholder="adicionar comentário" />
+            </div>
           </div>
-          <button type="submit">
-            Pedir
-          </button>
+          <button type="submit">Pedir</button>
         </form>
       </div>
     </div>
