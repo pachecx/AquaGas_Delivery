@@ -8,6 +8,7 @@ import { FaMapMarkerAlt } from "react-icons/fa";
 import produtos from "../../mock/produtos.json";
 
 import "./style.css";
+import { Link } from "react-router-dom";
 
 interface PropsProdutos {
   id: string;
@@ -72,7 +73,10 @@ const ListaEmpresas = () => {
 <div className="flex flex-col items-center gap-1">
   <img className=" w-8" src={Garrafao} />
   <button className="flex flex-row items-center rounded bg-sky-500 text-white px-1">
+    <Link to={`/detalhespedido/${produto.id}`}>
     Pedir
+    
+    </Link>
     <TbBottle />
   </button>
 </div>

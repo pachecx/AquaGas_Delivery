@@ -47,7 +47,7 @@ const router = createBrowserRouter([
     element: <EsqueceuSenha />,
   },
   {
-    path: "/detalhespedido",
+    path: "/detalhespedido/:id",
     element: <DetalhesPedidos />,
   },
 ]);
