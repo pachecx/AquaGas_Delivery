@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import api from "../../service";
 
 const Formcadastro = () => {
   const [dados, setDados] = useState({});
 
-  const handleCadastro = (e) => {
+  const handleCadastro = (e: { target: { name: string; value: string; }; }) => {
     const { name, value } = e.target;
 
     setDados((prev) => {
@@ -13,9 +14,17 @@ const Formcadastro = () => {
     });
   };
 
-  const Cadastro = (e) => {
+  const Cadastro = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
-    console.log(dados)
+
+    try {
+      const response = await api.post(`/registrar`, dados)
+
+      console.log("teste", response)
+    } catch (error) {
+      console.log(error)
+    }
+
   };
   return (
     <div className="container">
@@ -42,7 +51,7 @@ const Formcadastro = () => {
               onChange={handleCadastro}
               className="w-full p-2 mb-2 mt-1 outline-none ring-none focus:ring-2 focus:ring-sky-500"
             />
-              <label
+            <label
               htmlFor="cnpj"
               className="text-xs font-bold after:content-['*']"
             >
@@ -52,7 +61,7 @@ const Formcadastro = () => {
               required
               name="cnpj"
               minLength={14}
-              type="number"
+              type="text"
               onChange={handleCadastro}
               className="w-full p-2 mb-2 mt-1 outline-none ring-none focus:ring-2 focus:ring-sky-500"
             />
@@ -66,6 +75,20 @@ const Formcadastro = () => {
               required
               name="email"
               type="email"
+              onChange={handleCadastro}
+              className="w-full p-2 mb-2 mt-1 outline-none ring-none focus:ring-2 focus:ring-sky-500"
+            />
+
+            <label
+              htmlFor="tel"
+              className="text-xs font-bold after:content-['*']"
+            >
+              WhatsApp{" "}
+            </label>
+            <input
+              required
+              name="tel"
+              type="tel"
               onChange={handleCadastro}
               className="w-full p-2 mb-2 mt-1 outline-none ring-none focus:ring-2 focus:ring-sky-500"
             />

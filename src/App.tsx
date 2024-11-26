@@ -1,7 +1,25 @@
 import { Link } from "react-router-dom";
 import Logo from "./assets/Logo.png";
+import api from "./service";
+import { useEffect } from "react";
+
 
 function App() {
+
+  
+const pegarDados = async () => {
+  try {
+    const response = await api.get(`/home`);
+    console.log(response.data);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+useEffect(() => {
+  pegarDados();
+}, []);
+
   return (
     <div className="bg-custom-gradient h-screen flex flex-col items-center pt-8">
       <header>

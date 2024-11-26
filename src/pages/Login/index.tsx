@@ -1,12 +1,15 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "../ListaEmpresas/style.css";
 import { useState } from "react";
+import api from "../../service";
+
 
 const Login = () => {
+  const navigate = useNavigate()
+
   const [dados, setDados] = useState({});
 
-  const handleLogar = (e) => {
+  const handleLogar = (e: { target: { name: string; value: string; }; }) => {
     const { name, value } = e.target;
 
     setDados((prev) => {
@@ -16,10 +19,19 @@ const Login = () => {
     });
   };
 
-  const Logar = (e) => {
+  const Logar = async (e: { preventDefault: () => void; }) => {
     e.preventDefault()
 
-    console.log('login', dados)
+    try {
+      const response = await api.post(`/logar`, dados)
+      console.log('login', response)
+
+      if(response.status === 200) navigate("/homeEstabelecimento")
+
+    } catch (error) {
+      console.log(error)
+    }
+
   };
 
 
@@ -38,7 +50,7 @@ const Login = () => {
             htmlFor="email"
             className="text-xs font-bold after:content-['*']"
           >
-            Email ou Cnpj{" "}
+            Email{" "}
           </label>
           <input
             required
