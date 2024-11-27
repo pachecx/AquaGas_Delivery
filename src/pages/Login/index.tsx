@@ -3,13 +3,12 @@ import "../ListaEmpresas/style.css";
 import { useState } from "react";
 import api from "../../service";
 
-
 const Login = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [dados, setDados] = useState({});
 
-  const handleLogar = (e: { target: { name: string; value: string; }; }) => {
+  const handleLogar = (e: { target: { name: string; value: string } }) => {
     const { name, value } = e.target;
 
     setDados((prev) => {
@@ -19,51 +18,42 @@ const Login = () => {
     });
   };
 
-  const Logar = async (e: { preventDefault: () => void; }) => {
-    e.preventDefault()
+  const Logar = async (e: { preventDefault: () => void }) => {
+    e.preventDefault();
 
     try {
-      const response = await api.post(`/logar`, dados)
-      console.log('login', response)
+      const response = await api.post(`/logar`, dados);
+      console.log("login", response);
 
-      if(response.status === 200) navigate("/homeEstabelecimento")
-
+      if (response.status === 200) navigate("/homeEstabelecimento");
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-
   };
 
-
   return (
-    <div className="container px-3 pt-24">
+    <div className="h-screen mx-auto px-6 pt-24 bg-gradient-to-r from-blue-50 to-blue-100">
       <div
-        className="mx-auto my-0 relative shadow-2xl max-w-sm rounded-md overflow-hidden flex flex-col justify-between p-3 after:absolute after:w-24 after:h-24 after:bg-sky-300 after:-z-10 after:rounded-full after:-top-4 after:-right-4 after:blur-xl border after:[box-shadow:-150px_50px_10px_100px_#7dd3fc]"
+        className="relative mx-auto max-w-md bg-white rounded-lg shadow-lg overflow-hidden p-6 flex flex-col justify-between"
         id="login"
       >
-        <h1 className=" border-sky-500 hover:bg-sky-100 rounded text-2xl p-2 font-bold flex flex-row gap-3 justify-center">
-          <span>Login</span>
+        <h1 className="text-3xl font-semibold text-center text-gray-800 mb-6">
+          Login
         </h1>
 
-        <form onSubmit={Logar} className="text-gray-700">
-          <label
-            htmlFor="email"
-            className="text-xs font-bold after:content-['*']"
-          >
-            Email{" "}
+        <form onSubmit={Logar} className="text-gray-600">
+          <label htmlFor="email" className="block text-sm font-medium mb-1">
+            Email<span className="text-red-500">*</span>
           </label>
           <input
             required
             onChange={handleLogar}
             name="email"
             type="email"
-            className="w-full p-2 mb-2 mt-1 outline-none ring-none focus:ring-2 focus:ring-sky-500"
+            className="w-full p-3 border border-gray-300 rounded-lg focus:border-indigo-500 focus:ring focus:ring-indigo-200 transition mb-4"
           />
-          <label
-            htmlFor="password"
-            className="text-xs font-bold after:content-['*']"
-          >
-            Senha
+          <label htmlFor="password" className="block text-sm font-medium mb-1">
+            Senha<span className="text-red-500">*</span>
           </label>
           <input
             required
@@ -71,21 +61,24 @@ const Login = () => {
             name="senha"
             type="password"
             minLength={6}
-            className="w-full p-2 mb-2 mt-1 outline-none ring-none focus:ring-2 focus:ring-sky-500"
+            className="w-full p-3 border border-gray-300 rounded-lg focus:border-indigo-500 focus:ring focus:ring-indigo-200 transition mb-4"
           />
-          <Link className="block text-right text-xs text-white mb-4" to="/esqueceusenha">
-            Esqueceu senha?
+          <Link
+            to="/esqueceusenha"
+            className="text-sm text-indigo-600 hover:underline block text-right mb-4"
+          >
+            Esqueceu a senha?
           </Link>
-          <button className="w-full rounded bg-sky-500 text-sky-50 p-2 text-center font-bold hover:bg-sky-400">
+          <button className="w-full bg-indigo-600 text-white p-3 rounded-lg font-semibold hover:bg-indigo-500 transition">
             Entrar
           </button>
         </form>
 
-        <p className="mt-6 flex justify-center font-sans text-gray-700 text-sm leading-normal text-inherit antialiased">
+        <p className="mt-6 text-center text-gray-600 text-sm">
           Não possui conta?
           <Link
-            className="ml-1 block font-sans text-sm font-bold leading-normal text-white antialiased"
-            to={"/Cadastro"}
+            to="/Cadastro"
+            className="ml-1 text-indigo-600 font-semibold hover:underline"
           >
             Cadastre-se
           </Link>

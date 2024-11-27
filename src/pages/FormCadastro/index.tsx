@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState } from "react";
 import api from "../../service";
 
 const Formcadastro = () => {
@@ -27,110 +26,110 @@ const Formcadastro = () => {
 
   };
   return (
-    <div className="container">
-      <div className="px-3 pt-24">
-        <div
-          className="mx-auto my-0 relative shadow-2xl max-w-sm rounded-md overflow-hidden flex flex-col justify-between p-3 after:absolute after:w-24 after:h-24 after:bg-sky-300 after:-z-10 after:rounded-full after:-top-4 after:-right-4 after:blur-xl border after:[box-shadow:-150px_50px_10px_100px_#7dd3fc]"
-          id="login"
-        >
-          <h1 className=" border-sky-500 hover:bg-sky-100 rounded text-2xl p-2 font-bold flex flex-row gap-3 justify-center">
-            <span>Cadastro</span>
-          </h1>
-
-          <form onSubmit={Cadastro} className="text-gray-700">
-            <label
-              htmlFor="nome"
-              className="text-xs font-bold after:content-['*']"
-            >
-              Nome fantasia{" "}
-            </label>
-            <input
-              required
-              name="nome"
-              type="text"
-              onChange={handleCadastro}
-              className="w-full p-2 mb-2 mt-1 outline-none ring-none focus:ring-2 focus:ring-sky-500"
-            />
-            <label
-              htmlFor="cnpj"
-              className="text-xs font-bold after:content-['*']"
-            >
-              Cnpj{" "}
-            </label>
-            <input
-              required
-              name="cnpj"
-              minLength={14}
-              type="text"
-              onChange={handleCadastro}
-              className="w-full p-2 mb-2 mt-1 outline-none ring-none focus:ring-2 focus:ring-sky-500"
-            />
-            <label
-              htmlFor="email"
-              className="text-xs font-bold after:content-['*']"
-            >
-              Email{" "}
-            </label>
-            <input
-              required
-              name="email"
-              type="email"
-              onChange={handleCadastro}
-              className="w-full p-2 mb-2 mt-1 outline-none ring-none focus:ring-2 focus:ring-sky-500"
-            />
-
-            <label
-              htmlFor="tel"
-              className="text-xs font-bold after:content-['*']"
-            >
-              WhatsApp{" "}
-            </label>
-            <input
-              required
-              name="tel"
-              type="tel"
-              onChange={handleCadastro}
-              className="w-full p-2 mb-2 mt-1 outline-none ring-none focus:ring-2 focus:ring-sky-500"
-            />
-            <label
-              htmlFor="password"
-              className="text-xs font-bold after:content-['*']"
-            >
-              Senha
-            </label>
-            <input
-              required
-              type="password"
-              name="password"
-              minLength={6}
-              onChange={handleCadastro}
-              className="w-full p-2 mb-2 mt-1 outline-none ring-none focus:ring-2 focus:ring-sky-500"
-            />
-            <label
-              htmlFor="confirmPassword"
-              className="text-xs font-bold after:content-['*']"
-            >
-              Confirmar Senha
-            </label>
-            <input
-              required
-              minLength={6}
-              onChange={handleCadastro}
-              name="confirmPassword"
-              type="password"
-              className="w-full p-2 mb-2 mt-1 outline-none ring-none focus:ring-2 focus:ring-sky-500"
-            />
-
-            <button
-              type="submit"
-              className="w-full rounded bg-sky-500 text-sky-50 p-2 text-center font-bold hover:bg-sky-400"
-            >
-              Cadastrar
-            </button>
-          </form>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-50 to-blue-100 py-6">
+    <div className="bg-white p-10 rounded-xl shadow-lg max-w-lg w-full">
+      <h1 className="text-3xl font-semibold text-center text-blue-600 mb-8">
+        Cadastro
+      </h1>
+  
+      <form onSubmit={Cadastro} className="space-y-5">
+        <div>
+          <label htmlFor="nome" className="block text-sm font-medium text-gray-700 mb-1">
+            Nome fantasia<span className="text-red-500">*</span>
+          </label>
+          <input
+            required
+            name="nome"
+            type="text"
+            onChange={handleCadastro}
+            className="w-full p-3 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-200 transition"
+            placeholder="Digite o nome da empresa"
+          />
         </div>
-      </div>
+  
+        <div>
+          <label htmlFor="cnpj" className="block text-sm font-medium text-gray-700 mb-1">
+            CNPJ<span className="text-red-500">*</span>
+          </label>
+          <input
+            required
+            name="cnpj"
+            minLength={14}
+            type="text"
+            onChange={handleCadastro}
+            className="w-full p-3 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-200 transition"
+            placeholder="Digite o CNPJ"
+          />
+        </div>
+  
+        <div>
+          <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+            Email<span className="text-red-500">*</span>
+          </label>
+          <input
+            required
+            name="email"
+            type="email"
+            onChange={handleCadastro}
+            className="w-full p-3 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-200 transition"
+            placeholder="seuemail@exemplo.com"
+          />
+        </div>
+  
+        <div>
+          <label htmlFor="tel" className="block text-sm font-medium text-gray-700 mb-1">
+            WhatsApp<span className="text-red-500">*</span>
+          </label>
+          <input
+            required
+            name="tel"
+            type="tel"
+            onChange={handleCadastro}
+            className="w-full p-3 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-200 transition"
+            placeholder="(XX) XXXXX-XXXX"
+          />
+        </div>
+  
+        <div>
+          <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
+            Senha<span className="text-red-500">*</span>
+          </label>
+          <input
+            required
+            type="password"
+            name="password"
+            minLength={6}
+            onChange={handleCadastro}
+            className="w-full p-3 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-200 transition"
+            placeholder="Digite sua senha"
+          />
+        </div>
+  
+        <div>
+          <label htmlFor="confirmPassword" className="block text-sm font-medium text-gray-700 mb-1">
+            Confirmar Senha<span className="text-red-500">*</span>
+          </label>
+          <input
+            required
+            minLength={6}
+            onChange={handleCadastro}
+            name="confirmPassword"
+            type="password"
+            className="w-full p-3 border border-gray-300 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-200 transition"
+            placeholder="Confirme sua senha"
+          />
+        </div>
+  
+        <button
+          type="submit"
+          className="w-full bg-blue-600 text-white p-3 rounded-lg font-bold hover:bg-blue-500 transition"
+        >
+          Cadastrar
+        </button>
+      </form>
     </div>
+  </div>
+  
   );
 };
 

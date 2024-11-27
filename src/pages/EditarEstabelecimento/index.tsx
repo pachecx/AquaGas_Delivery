@@ -2,32 +2,32 @@ import React from 'react'
 
 const EditarEstabelecimento = () => {
   return (
-    <div className='p-3'>
+    <div className=''>
         <h1>Editar Perfil</h1>
         
         <div>
             <form>
-            <div className='flex flex-col'>
+            <div className=''>
                     <label htmlFor='nomeEmpresa'>Nome da empresa</label>
                     <input className='border' type='text' name='nomeEmpresa'/>
                 </div>
-                <div className='flex flex-col'>
+                <div className=''>
                     <label htmlFor='cidade'>Cidade</label>
                     <input className='border' type='text' name='cidade'/>
                 </div>
-                <div className='flex flex-col'>
+                <div className=''>
                     <label htmlFor='bairro'>Bairro</label>
                     <input className='border' type='text' name='bairro'/>
                 </div>
-                <div className='flex flex-col'>
+                <div className=''>
                     <label htmlFor='rua'>Rua</label>
                     <input className='border' type='text' name='rua'/>
                 </div>
-                <div className='flex flex-col'>
+                <div className=''>
                     <label htmlFor='numero'>Numero</label>
                     <input className='border' type='text' name='numero'/>
                 </div>
-                <div className='flex flex-col'>
+                <div className=''>
                     <h3>Delivery</h3>
                     <div>
                     <label htmlFor='entrega'>Sim</label>
