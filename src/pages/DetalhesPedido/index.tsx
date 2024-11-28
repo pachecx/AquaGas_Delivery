@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import agua from "../../assets/garrafao.png";
 
 const DetalhesPedidos = () => {
@@ -11,7 +11,7 @@ const DetalhesPedidos = () => {
     comentario: "",
   });
 
-  const hadlePedido = (e: { target: { name: any; value: any } }) => {
+  const hadlePedido = (e: { target: { name: string; value: string } }) => {
     const { name, value } = e.target;
 
     setPedido((prev) => {
@@ -48,107 +48,136 @@ const DetalhesPedidos = () => {
   };
 
   return (
-    <div>
-      <div className="p-3">
-        <img className="h-40 mx-auto my-0" src={agua} />
+    <div className="min-h-screen bg-gradient-to-r from-blue-100 to-blue-300 flex items-center justify-center p-6">
+  <div className="p-6 bg-white shadow-lg rounded-lg max-w-md w-full">
+    <img className="h-40 mx-auto my-4" src={agua} alt="Produto Água" />
 
-        <form onSubmit={pedir} className="border">
-          <div>
-            <div className="flex justify-center">
-              <button onClick={remover} className="border px-1">
-                -
-              </button>
-              <input
-                className="text-center"
-                type="number"
-                onChange={hadlePedido}
-                value={pedido.quantidade} 
-                name="quantidade"
-                min="1"
-              />
-              <button onClick={adicionar} className="border px-1">
-                +
-              </button>
-            </div>
-
-            <div className="my-4">
-              <p>Endereço</p>
-              <div>
-                <label htmlFor="nome">Nome:</label>
-                <input
-                  required
-                  minLength={5}
-                  onChange={hadlePedido}
-                  type="text"
-                  name="nome"
-                  placeholder="Quem vai receber"
-                />
-              </div>
-              <div>
-                <label htmlFor="rua">Rua:</label>
-                <input
-                  required
-                  min={2}
-                  onChange={hadlePedido}
-                  type="text"
-                  name="rua"
-                  placeholder="Rua e numero"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="bairro">Bairro:</label>
-                <input
-                  onChange={hadlePedido}
-                  required
-                  min={5}
-                  type="text"
-                  name="bairro"
-                />
-              </div>
-            </div>
-
-            <div>
-              <p>Pagamento</p>
-              <div>
-                <input
-                  onChange={hadlePedido}
-                  type="radio"
-                  name="pagamento"
-                  value="dinheiro"
-                  required
-                />
-                <label htmlFor="dinheiro">Dinheiro</label>
-              </div>
-
-              <div>
-                <input
-                  onChange={hadlePedido}
-                  type="radio"
-                  name="pagamento"
-                  value="cartao"
-                />
-                <label htmlFor="cartao">Cartão</label>
-              </div>
-            </div>
-
-            <div className="flex flex-col">
-              <label htmlFor="comentario">Cometário</label>
-              <input
-                name="comentario"
-                onChange={hadlePedido}
-                className="p-1 min-h-20"
-                type="text"
-                placeholder="adicionar comentário"
-              />
-            </div>
-          </div>
-          <button className="mx-auto my-0 border" type="submit">
-            Pedir
+    <form onSubmit={pedir} className="border rounded-lg p-4 bg-blue-50">
+      <div className="mb-4">
+        <div className="flex justify-center items-center gap-2">
+          <button
+            onClick={remover}
+            type="button"
+            className="bg-red-400 text-white rounded px-2 py-1 font-bold hover:bg-red-500 transition"
+          >
+            -
           </button>
-        </form>
+          <input
+            className="w-16 text-center border border-gray-300 rounded px-2"
+            type="number"
+            onChange={hadlePedido}
+            value={pedido.quantidade}
+            name="quantidade"
+            min="1"
+          />
+          <button
+            onClick={adicionar}
+            type="button"
+            className="bg-green-400 text-white rounded px-2 py-1 font-bold hover:bg-green-500 transition"
+          >
+            +
+          </button>
+        </div>
       </div>
-    </div>
+
+      <div className="my-4">
+        <p className="font-bold text-lg text-gray-700 mb-2">Endereço</p>
+        <div className="mb-3">
+          <label htmlFor="nome" className="block text-sm font-semibold text-gray-600">
+            Nome:
+          </label>
+          <input
+            required
+            minLength={5}
+            onChange={hadlePedido}
+            type="text"
+            name="nome"
+            placeholder="Quem vai receber"
+            className="w-full border border-gray-300 rounded p-2"
+          />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="rua" className="block text-sm font-semibold text-gray-600">
+            Rua:
+          </label>
+          <input
+            required
+            min={2}
+            onChange={hadlePedido}
+            type="text"
+            name="rua"
+            placeholder="Rua e número"
+            className="w-full border border-gray-300 rounded p-2"
+          />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="bairro" className="block text-sm font-semibold text-gray-600">
+            Bairro:
+          </label>
+          <input
+            required
+            min={5}
+            onChange={hadlePedido}
+            type="text"
+            name="bairro"
+            className="w-full border border-gray-300 rounded p-2"
+          />
+        </div>
+      </div>
+
+      <div className="my-4">
+        <p className="font-bold text-lg text-gray-700 mb-2">Pagamento</p>
+        <div className="flex items-center gap-2 mb-2">
+          <input
+            onChange={hadlePedido}
+            type="radio"
+            name="pagamento"
+            value="dinheiro"
+            required
+            className="w-4 h-4"
+          />
+          <label htmlFor="dinheiro" className="text-sm font-medium text-gray-600">
+            Dinheiro
+          </label>
+        </div>
+        <div className="flex items-center gap-2">
+          <input
+            onChange={hadlePedido}
+            type="radio"
+            name="pagamento"
+            value="cartao"
+            className="w-4 h-4"
+          />
+          <label htmlFor="cartao" className="text-sm font-medium text-gray-600">
+            Cartão
+          </label>
+        </div>
+      </div>
+
+      <div className="my-4">
+        <label htmlFor="comentario" className="block text-sm font-semibold text-gray-600">
+          Comentário
+        </label>
+        <input
+          name="comentario"
+          onChange={hadlePedido}
+          className="w-full border border-gray-300 rounded p-2"
+          type="text"
+          placeholder="Adicionar comentário"
+        />
+      </div>
+
+      <button
+        type="submit"
+        className="block w-full bg-blue-500 text-white text-lg font-semibold rounded py-2 mt-4 hover:bg-blue-600 transition"
+      >
+        Pedir
+      </button>
+    </form>
+  </div>
+</div>
+
+
   );
 };
 

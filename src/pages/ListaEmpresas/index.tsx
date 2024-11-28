@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Garrafao from "../../assets/garrafao.png";
 
 import { TbBottle } from "react-icons/tb";
@@ -30,14 +30,12 @@ const ListaEmpresas = () => {
   console.log(data);
 
   return (
-    <div className="container">
-      <header className="mb-10 pt-6 pl-3">
-        <div className="p-5 overflow-hidden w-[60px] h-[60px] hover:w-[270px] bg-white shadow-[2px_2px_20px_rgba(0,0,0,0.08)] rounded-full flex group items-center hover:duration-300 duration-300">
-          <div className="flex items-center justify-center fill-black">
+    <div className="min-h-screen bg-gradient-to-r from-blue-50 to-blue-100 py-6">
+      <header className="mb-8 px-4">
+        <div className="relative flex items-center group w-full max-w-md mx-auto bg-white shadow-lg rounded-full overflow-hidden p-3">
+          <div className="flex items-center justify-center text-gray-500">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              id="Isolation_Mode"
-              data-name="Isolation Mode"
               viewBox="0 0 24 24"
               width={22}
               height={22}
@@ -46,64 +44,46 @@ const ListaEmpresas = () => {
             </svg>
           </div>
           <input
-            placeholder="Procurar empresa"
             type="text"
-            className="outline-none text-[20px] bg-transparent w-full text-black font-normal px-4"
+            placeholder="Procurar empresa"
+            className="ml-3 w-full bg-transparent outline-none text-lg text-gray-700 placeholder-gray-400"
           />
         </div>
       </header>
-      <main className="px-3">
 
+      <main className="px-4">
         {produtos.map((produto) => (
-
-<div key={produto.id} className="rounded  border bg-white flex flex-row items-center justify-between p-3 mb-2">
-<div>
-  <h2 className="font-inter">{produto.nome}</h2>
-  <p>Valor: {produto.valorAgua}</p>
-
-  <div className="flex flex-row gap-1 items-center">
-    <p>Avaliação: ****</p>
-
-    <div className="flex flex-row gap-1 items-center">
-      <FaMapMarkerAlt className="text-red-500" />
-      <p className="text-xs">2.5 km</p>
-    </div>
-  </div>
-</div>
-<div className="flex flex-col items-center gap-1">
-  <img className=" w-8" src={Garrafao} />
-  <button className="flex flex-row items-center rounded bg-sky-500 text-white px-1">
-    <Link to={`/detalhespedido/${produto.id}`}>
-    Pedir
-    
-    </Link>
-    <TbBottle />
-  </button>
-</div>
-</div>
-        ))}
-        {/* <div className="rounded  border bg-white flex flex-row items-center justify-between p-3">
-          <div>
-            <h2 className="font-inter">Nome da empresa</h2>
-            <p>Valor: 6,00</p>
-
-            <div className="flex flex-row gap-1 items-center">
-              <p>Avaliação: ****</p>
-
-              <div className="flex flex-row gap-1 items-center">
-                <FaMapMarkerAlt className="text-red-500" />
-                <p className="text-xs">2.5 km</p>
+          <div
+            key={produto.id}
+            className="bg-white border rounded-lg shadow-md p-5 flex justify-between items-center mb-4"
+          >
+            <div>
+              <h2 className="text-xl font-semibold text-gray-800 mb-2">
+                {produto.nome}
+              </h2>
+              <p className="text-gray-600 mb-2">
+                Valor: R$ {produto.valorAgua}
+              </p>
+              <div className="flex items-center gap-2">
+                <p className="text-yellow-500 font-medium">Avaliação: ★★★★☆</p>
+                <div className="flex items-center gap-1">
+                  <FaMapMarkerAlt className="text-red-500" />
+                  <p className="text-xs text-gray-500">2.5 km</p>
+                </div>
               </div>
             </div>
+
+            <div className="flex flex-col items-center gap-3">
+              <img src={Garrafao} alt="Garrafão" className="w-14 h-14" />
+              <button className="flex items-center bg-blue-500 text-white px-3 py-1 rounded-md hover:bg-blue-600 transition">
+                <Link to={`/detalhespedido/${produto.id}`} className="mr-2">
+                  Pedir
+                </Link>
+                <TbBottle size={20} />
+              </button>
+            </div>
           </div>
-          <div className="flex flex-col items-center gap-1">
-            <img className=" w-8" src={Garrafao} />
-            <button className="flex flex-row items-center rounded bg-sky-500 text-white px-1">
-              Pedir
-              <TbBottle />
-            </button>
-          </div>
-        </div> */}
+        ))}
       </main>
     </div>
   );
