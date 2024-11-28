@@ -21,7 +21,7 @@ const EsqueceuSenha = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-blue-50">
+    <div className="min-h-screen flex items-center justify-center bg-blue-50 px-6">
     <div className="bg-white p-8 rounded-lg shadow-lg max-w-sm w-full">
       <h1 className="text-2xl font-semibold text-center text-blue-600 mb-4">
         Redefinir Senha
