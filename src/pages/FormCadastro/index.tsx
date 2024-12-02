@@ -1,5 +1,6 @@
 import { useState } from "react";
 import api from "../../service";
+import { useNavigate } from "react-router-dom";
 
 const Formcadastro = () => {
   const [dados, setDados] = useState({
@@ -10,7 +11,7 @@ const Formcadastro = () => {
     tel: " ",
     confirmPassword: "",
   });
-  const navigate = useState();
+  const navigate = useNavigate();
 
   const handleCadastro = (e: { target: { name: string; value: string } }) => {
     const { name, value } = e.target;
@@ -33,12 +34,10 @@ const Formcadastro = () => {
     try {
       const response = await api.post(`/registrar/empresa`, dados);
 
-      console.log("teste", response);
+      if (response.status === 201) return navigate("/Login");
     } catch (error) {
       console.log(error);
     }
-
-    console.log(dados);
   };
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-50 to-blue-100 py-6 px-6">

@@ -182,3 +182,5 @@ const DetalhesPedidos = () => {
 };
 
 export default DetalhesPedidos;
+
+ /*to={'https://api.whatsapp.com/send?phone=5598982283717'}*/

@@ -23,9 +23,19 @@ const Login = () => {
 
     try {
       const response = await api.post(`/logar`, dados);
+
+      const token = response.data.token;
       console.log("login", response);
 
-      if (response.status === 200) navigate("/homeEstabelecimento");
+
+      if (token) {
+        localStorage.setItem("token", token); // Armazena o token somente se ele existir
+        if (response.status === 200) return navigate(`/HomeEstabelecimento/${response.data.id}`);
+      } else {
+        console.log("Erro: Token não recebido!");
+      }
+
+      //if (response.status === 200) return navigate("/HomeEstabelecimento");
     } catch (error) {
       console.log(error);
     }
