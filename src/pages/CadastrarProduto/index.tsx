@@ -1,5 +1,45 @@
+import { useState } from "react";
+import api from "../../service";
+import { useNavigate, useParams } from "react-router-dom";
 
 const CadastrarProduto = () => {
+  const navigate = useNavigate();
+  const id = useParams();
+
+  const [produtos, setProdutos] = useState({
+    nomeProduto: "",
+    volumePeso: "",
+    valor: "",
+    tipo: "",
+    cnpj: "65569856365458"
+  });
+
+  const handleProdutos = (e: { target: { name: string; value: string } }) => {
+    const { name, value } = e.target;
+
+    setProdutos((prev) => {
+      const newProdutos = { ...prev, [name]: value };
+      return newProdutos;
+    });
+  };
+
+  
+
+  const Salvar = async (e: { preventDefault: () => void }) => {
+    e.preventDefault();
+
+    try {
+      const response = await api.post(`/cadastrar/produto`, produtos);
+      if (response.status === 200){
+       navigate(`/HomeEstabelecimento/${id}`);
+      }else{
+        alert('Produto não cadastrado!')
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  console.log(produtos);
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-50 to-blue-100 p-6">
       <div className="bg-white p-8 rounded-xl shadow-lg max-w-md w-full">
@@ -7,7 +47,7 @@ const CadastrarProduto = () => {
           Novo Produto
         </h1>
 
-        <form className="space-y-5">
+        <form onSubmit={Salvar} className="space-y-5">
           <div className="flex flex-col">
             <label
               htmlFor="nomeProduto"
@@ -18,6 +58,7 @@ const CadastrarProduto = () => {
             <input
               className="border border-gray-300 p-3 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-200 transition"
               type="text"
+              onChange={handleProdutos}
               name="nomeProduto"
               placeholder="Ex: Garrafão 20L"
               required
@@ -33,8 +74,9 @@ const CadastrarProduto = () => {
             </label>
             <input
               className="border border-gray-300 p-3 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-200 transition"
+              onChange={handleProdutos}
               type="text"
-              name="volume"
+              name="volumePeso"
               placeholder="Ex: 5L ou 13kg"
               required
             />
@@ -49,9 +91,10 @@ const CadastrarProduto = () => {
             </label>
             <input
               className="border border-gray-300 p-3 rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-200 transition"
+              onChange={handleProdutos}
               type="text"
               name="valor"
-              placeholder="Ex: R$ 50,00"
+              placeholder="Ex: R$ 10,00"
               required
             />
           </div>
@@ -63,7 +106,8 @@ const CadastrarProduto = () => {
                 <input
                   className="border-gray-300 focus:ring-blue-500"
                   type="radio"
-                  name="aguagas"
+                  onChange={handleProdutos}
+                  name="tipo"
                   value="agua"
                   required
                 />
@@ -73,7 +117,8 @@ const CadastrarProduto = () => {
                 <input
                   className="border-gray-300 focus:ring-blue-500"
                   type="radio"
-                  name="aguagas"
+                  name="tipo"
+                  onChange={handleProdutos}
                   value="gas"
                   required
                 />
@@ -94,7 +139,6 @@ const CadastrarProduto = () => {
               type="file"
               name="imagem"
               accept="image/*"
-              required
             />
           </div>
 

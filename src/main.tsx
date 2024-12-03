@@ -35,7 +35,7 @@ const router = createBrowserRouter([
     element: <HomeEstabelecimento />,
   },
   {
-    path: "/editarEstabelecimento",
+    path: "/editarEstabelecimento/:id",
     element: <EditarEstabelecimento />,
   },
   {
