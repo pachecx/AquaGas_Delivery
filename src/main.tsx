@@ -4,7 +4,7 @@ import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
 import ListaEmpresas from "./pages/ListaEmpresas";
 import Login from "./pages/Login";
-import Cadastro from './pages/FormCadastro'
+import Cadastro from "./pages/FormCadastro";
 import HomeEstabelecimento from "./pages/HomeEstabelecimento/index.tsx";
 import EditarEstabelecimento from "./pages/EditarEstabelecimento/index.tsx";
 import CadastrarProduto from "./pages/CadastrarProduto/index.tsx";
@@ -12,6 +12,7 @@ import EsqueceuSenha from "./pages/EsqueceuSenha/index.tsx";
 import DetalhesPedidos from "./pages/DetalhesPedido/index.tsx";
 
 import "./index.css";
+import UseConntext from "./Hook/UseConntext.tsx";
 
 const router = createBrowserRouter([
   {
@@ -54,6 +55,8 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <UseConntext>
+      <RouterProvider router={router} />
+    </UseConntext>
   </StrictMode>
 );
