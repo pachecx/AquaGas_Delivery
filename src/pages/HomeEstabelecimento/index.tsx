@@ -5,7 +5,9 @@ import imgProduto from "../../assets/garrafao.png";
 import { useEffect, useState } from "react";
 import api from "../../service";
 
+
 const HomeEstabelecimento = () => {
+
   const [dados, setDados] = useState({
     nome: "",
     cnpj: "",
@@ -22,7 +24,16 @@ const HomeEstabelecimento = () => {
       console.log(error);
     }
   };
-  console.log(dados)
+
+  // const CarregarProdutos = async () => {
+  //   try {
+  //     const response = await api.get(`/produtos/listar/${65569856365458}`)
+  //     console.log("PRODUTOS:", response.data)
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  //}
+  //console.log(dados)
 
   useEffect(() => {
     CarregarPerfil();
@@ -65,7 +76,9 @@ const HomeEstabelecimento = () => {
           <button className="mb-6 w-full bg-green-600 text-white p-3 rounded-lg font-bold hover:bg-green-500 transition">
             <Link to="/cadastrarProduto">Cadastrar Produto</Link>
           </button>
-
+          ---
+            
+          {}
           <div className="bg-gray-100 p-4 rounded-lg flex justify-between items-center mb-4">
             <div>
               <h1 className="text-lg font-semibold text-gray-700">Garrafão</h1>
@@ -92,6 +105,8 @@ const HomeEstabelecimento = () => {
               </div>
             </div>
           </div>
+
+          --
         </div>
       </div>
     </div>

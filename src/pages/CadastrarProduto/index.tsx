@@ -3,21 +3,29 @@ import api from "../../service";
 import { useNavigate, useParams } from "react-router-dom";
 
 //import UseConntext from "../../Hook/UseConntext";
-import SomeContext from "../../Hook/someContext";
+import SomeContext from "../../Hook/SomeContext";
+
+interface produtos {
+  nomeProduto: string;
+  volumePeso: string;
+  valor: string;
+  tipo: string;
+  cnpj: string | null | undefined;
+}
 
 const CadastrarProduto = () => {
-
   const context = useContext(SomeContext);
+  console.log("dados do context:", context);
 
   const navigate = useNavigate();
-  const id = useParams();
+  const { id } = useParams();
 
-  const [produtos, setProdutos] = useState({
+  const [produtos, setProdutos] = useState<produtos>({
     nomeProduto: "",
     volumePeso: "",
     valor: "",
     tipo: "",
-    cnpj: "65569856365458"
+    cnpj: "",
   });
 
   const handleProdutos = (e: { target: { name: string; value: string } }) => {
@@ -29,24 +37,26 @@ const CadastrarProduto = () => {
     });
   };
 
-  
-
   const Salvar = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
 
     try {
+      if (!produtos.cnpj) {
+        produtos.cnpj = context?.cnpj;
+      }
+
       const response = await api.post(`/cadastrar/produto`, produtos);
-      if (response.status === 200){
-       navigate(`/HomeEstabelecimento/${id}`);
-      }else{
-        alert('Produto não cadastrado!')
+      if (response.status === 200) {
+        navigate(`/HomeEstabelecimento/${id}`);
+      } else {
+        alert("Produto não cadastrado!");
       }
     } catch (error) {
       console.log(error);
     }
   };
   //console.log(produtos);
-  console.log(context)
+  // console.log(context)
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-50 to-blue-100 p-6">
       <div className="bg-white p-8 rounded-xl shadow-lg max-w-md w-full">
