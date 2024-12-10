@@ -1,33 +1,66 @@
 import { useEffect, useState } from "react";
 import Garrafao from "../../assets/garrafao.png";
-
 import { TbBottle } from "react-icons/tb";
-
-import { FaMapMarkerAlt } from "react-icons/fa";
-
-import produtos from "../../mock/produtos.json";
-
+//import { FaMapMarkerAlt } from "react-icons/fa";
+//import produtos from "../../mock/produtos.json";
 import "./style.css";
 import { Link } from "react-router-dom";
+import api from "../../service";
+
+interface PropsEmpresa {
+  idusuarios: string;
+  nome: string;
+  email: string;
+  tel: string;
+  cnpj: string;
+}
 
 interface PropsProdutos {
-  id: string;
-  nome: string;
-  produtos: string[];
+  idprodutos: string;
+  nomeProduto: string;
+  volumePeso: string;
+  valor: string;
+  tipo: string;
+  cnpj: string;
 }
 
 const ListaEmpresas = () => {
-  const [data, setData] = useState<PropsProdutos[]>();
+  const [data, setData] = useState<PropsEmpresa[]>([]);
+  const [produtos, setProdutos] = useState<PropsProdutos[]>([]);
+
+  const ListarEmpresas = async () => {
+    try {
+      const response = await api.get(`/users/listar`);
+      setData(response.data.empresas);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const ProdutosListar = async () => {
+    try {
+      const response = await api.get(`/produstos/listar`);
+      setProdutos(response.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      setData(produtos);
+    ListarEmpresas();
+    ProdutosListar();
+  }, []);
+  console.log("Empresas:", data);
+  console.log("Produtos:", produtos);
 
-      console.log(data);
+  const produtoComEmpresa = produtos.map((produto) => {
+    const empresa = data.find((emp) => emp.cnpj === produto.cnpj);
+
+    return {
+      ...produto,
+      empresaNome: empresa ? empresa.nome : "Empresa não encontrada",
     };
-    fetchData();
-  }, [data]);
-  console.log(data);
+  });
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-blue-50 to-blue-100 py-6">
@@ -52,31 +85,35 @@ const ListaEmpresas = () => {
       </header>
 
       <main className="px-4">
-        {produtos.map((produto) => (
+        {produtoComEmpresa.map((produto) => (
           <div
-            key={produto.id}
+            key={produto.idprodutos}
             className="bg-white border rounded-lg shadow-md p-5 flex justify-between items-center mb-4"
           >
             <div>
               <h2 className="text-xl font-semibold text-gray-800 mb-2">
-                {produto.nome}
+                {produto.nomeProduto}
               </h2>
+              <p className="text-gray-600 mb-2">Valor: R$ {produto.valor},00</p>
               <p className="text-gray-600 mb-2">
-                Valor: R$ {produto.valorAgua}
+                Empresa: <strong>{produto.empresaNome}</strong>
               </p>
-              <div className="flex items-center gap-2">
+              {/* <div className="flex items-center gap-2">
                 <p className="text-yellow-500 font-medium">Avaliação: ★★★★☆</p>
                 <div className="flex items-center gap-1">
                   <FaMapMarkerAlt className="text-red-500" />
                   <p className="text-xs text-gray-500">2.5 km</p>
                 </div>
-              </div>
+              </div> */}
             </div>
 
             <div className="flex flex-col items-center gap-3">
               <img src={Garrafao} alt="Garrafão" className="w-14 h-14" />
               <button className="flex items-center bg-blue-500 text-white px-3 py-1 rounded-md hover:bg-blue-600 transition">
-                <Link to={`/detalhespedido/${produto.id}`} className="mr-2">
+                <Link
+                  to={`/detalhespedido/${produto.idprodutos}`}
+                  className="mr-2"
+                >
                   Pedir
                 </Link>
                 <TbBottle size={20} />
