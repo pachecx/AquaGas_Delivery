@@ -25,6 +25,7 @@ interface PropsProdutos {
 }
 
 const ListaEmpresas = () => {
+  const [buscar, setBuscar] = useState("");
   const [data, setData] = useState<PropsEmpresa[]>([]);
   const [produtos, setProdutos] = useState<PropsProdutos[]>([]);
 
@@ -50,8 +51,6 @@ const ListaEmpresas = () => {
     ListarEmpresas();
     ProdutosListar();
   }, []);
-  console.log("Empresas:", data);
-  console.log("Produtos:", produtos);
 
   const produtoComEmpresa = produtos.map((produto) => {
     const empresa = data.find((emp) => emp.cnpj === produto.cnpj);
@@ -60,6 +59,14 @@ const ListaEmpresas = () => {
       ...produto,
       empresaNome: empresa ? empresa.nome : "Empresa não encontrada",
     };
+  });
+
+  const filtrarEmpresa = produtoComEmpresa.filter((empresaBusca) => {
+    if (!buscar) return true; 
+    return (
+      typeof empresaBusca.empresaNome === "string" &&
+      empresaBusca.empresaNome.toLowerCase().startsWith(buscar.toLowerCase())
+    );
   });
 
   return (
@@ -77,6 +84,8 @@ const ListaEmpresas = () => {
             </svg>
           </div>
           <input
+            onChange={(e) => setBuscar(e.target.value)}
+            name="buscar"
             type="text"
             placeholder="Procurar empresa"
             className="ml-3 w-full bg-transparent outline-none text-lg text-gray-700 placeholder-gray-400"
@@ -85,31 +94,32 @@ const ListaEmpresas = () => {
       </header>
 
       <main className="px-4">
-        {produtoComEmpresa.map((produto) => (
+        {filtrarEmpresa.map((produto) => (
           <div
             key={produto.idprodutos}
-            className="bg-white border rounded-lg shadow-md p-5 flex justify-between items-center mb-4"
+            className="bg-white border border-gray-200 rounded-lg shadow-md hover:shadow-lg p-6 flex justify-between items-center mb-4 transition-all"
           >
             <div>
-              <h2 className="text-xl font-semibold text-gray-800 mb-2">
+              <h2 className="text-xl font-semibold text-gray-800 mb-1">
                 {produto.nomeProduto}
               </h2>
-              <p className="text-gray-600 mb-2">Valor: R$ {produto.valor},00</p>
               <p className="text-gray-600 mb-2">
-                Empresa: <strong>{produto.empresaNome}</strong>
+                <span className="font-medium">Valor:</span> R$ {produto.valor}
+                ,00
               </p>
-              {/* <div className="flex items-center gap-2">
-                <p className="text-yellow-500 font-medium">Avaliação: ★★★★☆</p>
-                <div className="flex items-center gap-1">
-                  <FaMapMarkerAlt className="text-red-500" />
-                  <p className="text-xs text-gray-500">2.5 km</p>
-                </div>
-              </div> */}
+              <p className="text-gray-600">
+                <span className="font-medium">Empresa:</span>{" "}
+                <strong className="text-blue-500">{produto.empresaNome}</strong>
+              </p>
             </div>
 
             <div className="flex flex-col items-center gap-3">
-              <img src={Garrafao} alt="Garrafão" className="w-14 h-14" />
-              <button className="flex items-center bg-blue-500 text-white px-3 py-1 rounded-md hover:bg-blue-600 transition">
+              <img
+                src={Garrafao}
+                alt="Garrafão"
+                className="w-16 h-16 object-contain"
+              />
+              <button className="flex items-center bg-gradient-to-r from-blue-500 to-blue-600 text-white px-4 py-2 rounded-md shadow hover:from-blue-600 hover:to-blue-700 transition-all">
                 <Link
                   to={`/detalhespedido/${produto.idprodutos}`}
                   className="mr-2"
