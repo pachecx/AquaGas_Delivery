@@ -40,7 +40,7 @@ const ListaEmpresas = () => {
 
   const ProdutosListar = async () => {
     try {
-      const response = await api.get(`/produstos/listar`);
+      const response = await api.get(`/produtos/listar`);
       setProdutos(response.data);
     } catch (error) {
       console.log(error);
@@ -62,7 +62,7 @@ const ListaEmpresas = () => {
   });
 
   const filtrarEmpresa = produtoComEmpresa.filter((empresaBusca) => {
-    if (!buscar) return true; 
+    if (!buscar) return true;
     return (
       typeof empresaBusca.empresaNome === "string" &&
       empresaBusca.empresaNome.toLowerCase().startsWith(buscar.toLowerCase())
