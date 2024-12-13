@@ -1,8 +1,8 @@
 import imgEstabelecimento from "../../assets/Logo.png";
 import "./style.css";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import imgProduto from "../../assets/garrafao.png";
-import imgProdutoGas from "../../assets/gas.jpeg";
+import imgProdutoGas from "../../assets/Gas-gas.png";
 import { useEffect, useState } from "react";
 import api from "../../service";
 
@@ -24,9 +24,15 @@ interface PropsEmpresa {
 }
 
 const HomeEstabelecimento = () => {
-  const [dados, setDados] = useState<PropsEmpresa[]>([]);
+  const [dados, setDados] = useState<PropsEmpresa[]>([{
+    idusuarios: '',
+  nome: '',
+  email: '',
+  tel: '',
+  cnpj: '',
+  }]);
   const [produtos, setProdutos] = useState<PropsProdutos[]>([]);
-
+  const navigate = useNavigate();
   const { id } = useParams();
 
   const CarregarPerfil = async () => {
@@ -63,6 +69,7 @@ const HomeEstabelecimento = () => {
     ProdutosCadastrados();
   }, []);
 
+  console.log( dados)
   return (
     <div className="min-h-screen bg-blue-50 p-6">
       <div className="bg-white p-6 rounded-lg shadow-lg max-w-lg mx-auto">
@@ -72,7 +79,7 @@ const HomeEstabelecimento = () => {
           alt="Imagem do Estabelecimento"
         />
         <h1 className="text-3xl font-bold text-blue-600 text-center mb-6">
-          titulo
+          {dados[0].nome}
         </h1>
 
         <div className="mb-8">
@@ -133,7 +140,12 @@ const HomeEstabelecimento = () => {
                       alt="Produto"
                     />
                     <div className="flex flex-col">
-                      <button className="bg-yellow-500 text-white p-2 rounded-lg font-bold hover:bg-yellow-400 transition mb-2">
+                      <button
+                        onClick={() =>
+                          navigate(`/editarproduto/${lista.idprodutos}`)
+                        }
+                        className="bg-yellow-500 text-white p-2 rounded-lg font-bold hover:bg-yellow-400 transition mb-2"
+                      >
                         Editar
                       </button>
                       <button className="bg-red-500 text-white p-2 rounded-lg font-bold hover:bg-red-400 transition">

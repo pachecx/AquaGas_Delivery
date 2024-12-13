@@ -10,6 +10,7 @@ import EditarEstabelecimento from "./pages/EditarEstabelecimento/index.tsx";
 import CadastrarProduto from "./pages/CadastrarProduto/index.tsx";
 import EsqueceuSenha from "./pages/EsqueceuSenha/index.tsx";
 import DetalhesPedidos from "./pages/DetalhesPedido/index.tsx";
+import EditarProduto from "./pages/EditarProduto/index.tsx";
 
 import "./index.css";
 import UseConntext from "./Hook/UseConntext.tsx";
@@ -50,6 +51,10 @@ const router = createBrowserRouter([
   {
     path: "/detalhespedido/:id",
     element: <DetalhesPedidos />,
+  },
+  {
+    path: "/editarproduto/:id",
+    element: <EditarProduto />,
   },
 ]);
 

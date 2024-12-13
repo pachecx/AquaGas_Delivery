@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import Garrafao from "../../assets/garrafao.png";
+import imgProduto from "../../assets/garrafao.png";
+import imgProdutoGas from "../../assets/Gas-gas.png";
 import { TbBottle } from "react-icons/tb";
 //import { FaMapMarkerAlt } from "react-icons/fa";
 //import produtos from "../../mock/produtos.json";
@@ -115,7 +116,7 @@ const ListaEmpresas = () => {
 
             <div className="flex flex-col items-center gap-3">
               <img
-                src={Garrafao}
+                src={produto.tipo === "agua" ? imgProduto : imgProdutoGas}
                 alt="Garrafão"
                 className="w-16 h-16 object-contain"
               />
