@@ -1,5 +1,10 @@
 
+import { useContext } from "react";
+import SomeContext from "../../Hook/SomeContext";
+
 const EditarEstabelecimento = () => {
+  const context = useContext(SomeContext);
+    console.log(context)
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-50 to-blue-100 p-6">
       <div className="bg-white p-8 rounded-xl shadow-lg max-w-md w-full">

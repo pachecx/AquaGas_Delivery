@@ -24,13 +24,15 @@ interface PropsEmpresa {
 }
 
 const HomeEstabelecimento = () => {
-  const [dados, setDados] = useState<PropsEmpresa[]>([{
-    idusuarios: '',
-  nome: '',
-  email: '',
-  tel: '',
-  cnpj: '',
-  }]);
+  const [dados, setDados] = useState<PropsEmpresa[]>([
+    {
+      idusuarios: "",
+      nome: "",
+      email: "",
+      tel: "",
+      cnpj: "",
+    },
+  ]);
   const [produtos, setProdutos] = useState<PropsProdutos[]>([]);
   const navigate = useNavigate();
   const { id } = useParams();
@@ -69,7 +71,7 @@ const HomeEstabelecimento = () => {
     ProdutosCadastrados();
   }, []);
 
-  console.log( dados)
+  console.log(dados);
   return (
     <div className="min-h-screen bg-blue-50 p-6">
       <div className="bg-white p-6 rounded-lg shadow-lg max-w-lg mx-auto">
