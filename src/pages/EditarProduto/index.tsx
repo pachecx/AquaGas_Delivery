@@ -15,6 +15,7 @@ interface produtos {
 
 const EditarProduto = () => {
   const context = useContext(SomeContext);
+
   console.log("dados do context:", context);
 
   const navigate = useNavigate();
@@ -46,6 +47,8 @@ const EditarProduto = () => {
     }
   };
 
+  //console.log(id)
+
   const Salvar = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
 
@@ -55,17 +58,19 @@ const EditarProduto = () => {
       }
 
       const response = await api.put(`/produtos/editar/${id}`, produtos);
-      if (response.status === 200) {
-        navigate(`/HomeEstabelecimento/${id}`);
+
+      if (response.status === 200 && context) {
+        const idusuario = context.id;
+        navigate(`/HomeEstabelecimento/${idusuario}`);
       } else {
         alert("Produto não cadastrado!");
       }
-      console.log("Editar:", response.data);
+      //console.log("Editar:", response.data);
     } catch (error) {
       console.log(error);
     }
   };
-  console.log(produtos);
+  //console.log(produtos);
 
   useEffect(() => {
     pegarProduto();

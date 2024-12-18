@@ -5,6 +5,7 @@ interface SomeContextType {
   nome: string | null;
   email: string | null;
   cnpj: string | null;
+  id: string | null;
 }
 
 // Criação do contexto com valor inicial nulo

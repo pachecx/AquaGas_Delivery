@@ -10,6 +10,7 @@ interface DecodedToken {
   nome: string;
   email: string;
   cnpj: string;
+  id: string;
 }
 
 const UseConntext: FC<UseContextProps> = ({ children }) => {
@@ -29,13 +30,13 @@ const UseConntext: FC<UseContextProps> = ({ children }) => {
 
   if (!decoded) {
     // Define valores padrão caso o token não seja decodificado
-    decoded = { nome: "", email: "", cnpj: "" };
+    decoded = { id: "", nome: "", email: "", cnpj: "" };
   }
 
-  const { nome, email, cnpj } = decoded;
+  const { id, nome, email, cnpj } = decoded;
 
   return (
-    <SomeContext.Provider value={{ nome, email, cnpj }}>
+    <SomeContext.Provider value={{ id, nome, email, cnpj }}>
       {children}
     </SomeContext.Provider>
   );

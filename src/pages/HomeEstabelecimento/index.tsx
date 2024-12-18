@@ -61,10 +61,26 @@ const HomeEstabelecimento = () => {
     return dados.some((empresa) => empresa.cnpj === produto.cnpj);
   });
 
+  // const DeletarProduto = async () => {
+  //   try {
+  //     const response = await api.delete(`/deletar/produto/$`)
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // }
+
   //console.log("dados:",dados)
   //console.log(produtos);
   //console.log(ProdutosDaEmpresa);
   console.log("FIND:", produtosComEmpresa);
+
+  // const DeletarProduto = async () => {
+  //   try {
+  //     const response = await api.delete(`/deletar/produto/${''}`)
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // }
 
   useEffect(() => {
     CarregarPerfil();
@@ -150,7 +166,21 @@ const HomeEstabelecimento = () => {
                       >
                         Editar
                       </button>
-                      <button className="bg-red-500 text-white p-2 rounded-lg font-bold hover:bg-red-400 transition">
+                      <button
+                        className="bg-red-500 text-white p-2 rounded-lg font-bold hover:bg-red-400 transition"
+                        onClick={async () => {
+                          try {
+                            const response = await api.delete(
+                              `/deletar/produto/${lista.idprodutos}`
+                            );
+                            if(response.status === (200)){
+                              window.location.reload()
+                            }
+                          } catch (error) {
+                            console.log(error);
+                          }
+                        }}
+                      >
                         Excluir
                       </button>
                     </div>
