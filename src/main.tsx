@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider, Outlet, Navigate } from "react-router-dom";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
@@ -11,11 +11,25 @@ import CadastrarProduto from "./pages/CadastrarProduto/index.tsx";
 import EsqueceuSenha from "./pages/EsqueceuSenha/index.tsx";
 import DetalhesPedidos from "./pages/DetalhesPedido/index.tsx";
 import EditarProduto from "./pages/EditarProduto/index.tsx";
+import Error404 from "./pages/Error404";
 
 import "./index.css";
 import UseConntext from "./Hook/UseConntext.tsx";
 
+// Simula uma função para verificar autenticação (substitua pela lógica real)
+const isAuthenticated = () => {
+  // Verifique o token ou estado de autenticação real
+  return localStorage.getItem("authToken") !== null;
+};
+
+// Componente de proteção de rota
+const PrivateRoute = () => {
+  return isAuthenticated() ? <Outlet /> : <Navigate to="/Login" replace />;
+};
+
+// Roteador
 const router = createBrowserRouter([
+  // Rotas públicas
   {
     path: "/",
     element: <App />,
@@ -33,28 +47,38 @@ const router = createBrowserRouter([
     element: <Cadastro />,
   },
   {
-    path: "/homeEstabelecimento/:id",
-    element: <HomeEstabelecimento />,
-  },
-  {
-    path: "/editarEstabelecimento/:id",
-    element: <EditarEstabelecimento />,
-  },
-  {
-    path: "/cadastrarProduto",
-    element: <CadastrarProduto />,
-  },
-  {
     path: "/esqueceusenha",
     element: <EsqueceuSenha />,
   },
   {
-    path: "/detalhespedido/:id",
-    element: <DetalhesPedidos />,
+    path: "/error",
+    element: <Error404/>,
   },
+  // Rotas protegidas
   {
-    path: "/editarproduto/:id",
-    element: <EditarProduto />,
+    element: <PrivateRoute />, // rotas privadas
+    children: [
+      {
+        path: "/homeEstabelecimento/:id",
+        element: <HomeEstabelecimento />,
+      },
+      {
+        path: "/editarEstabelecimento/:id",
+        element: <EditarEstabelecimento />,
+      },
+      {
+        path: "/cadastrarProduto",
+        element: <CadastrarProduto />,
+      },
+      {
+        path: "/detalhespedido/:id",
+        element: <DetalhesPedidos />,
+      },
+      {
+        path: "/editarproduto/:id",
+        element: <EditarProduto />,
+      },
+    ],
   },
 ]);
 

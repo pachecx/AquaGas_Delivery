@@ -35,7 +35,7 @@ const Login = () => {
         console.log("Erro: Token não recebido!");
       }
 
-      //if (response.status === 200) return navigate("/HomeEstabelecimento");
+      if (response.status === 200) return navigate("/HomeEstabelecimento");
     } catch (error) {
       console.log(error);
     }
