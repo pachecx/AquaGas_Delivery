@@ -12,17 +12,17 @@ import EsqueceuSenha from "./pages/EsqueceuSenha/index.tsx";
 import DetalhesPedidos from "./pages/DetalhesPedido/index.tsx";
 import EditarProduto from "./pages/EditarProduto/index.tsx";
 import Error404 from "./pages/Error404";
+import PedidoRealizado from "./pages/PedidoRealizado";
 
 import "./index.css";
 import UseConntext from "./Hook/UseConntext.tsx";
 
-// Simula uma função para verificar autenticação (substitua pela lógica real)
 const isAuthenticated = () => {
   // Verifique o token ou estado de autenticação real
-  return localStorage.getItem("authToken") !== null;
+  if(localStorage.getItem("token")) return true
 };
 
-// Componente de proteção de rota
+// proteção de rota
 const PrivateRoute = () => {
   return isAuthenticated() ? <Outlet /> : <Navigate to="/Login" replace />;
 };
@@ -54,6 +54,14 @@ const router = createBrowserRouter([
     path: "/error",
     element: <Error404/>,
   },
+  {
+    path: "/detalhespedido/:id",
+    element: <DetalhesPedidos />,
+  },
+  {
+    path: "/PedidoRealizado",
+    element: <PedidoRealizado />,
+  },
   // Rotas protegidas
   {
     element: <PrivateRoute />, // rotas privadas
@@ -69,10 +77,6 @@ const router = createBrowserRouter([
       {
         path: "/cadastrarProduto",
         element: <CadastrarProduto />,
-      },
-      {
-        path: "/detalhespedido/:id",
-        element: <DetalhesPedidos />,
       },
       {
         path: "/editarproduto/:id",

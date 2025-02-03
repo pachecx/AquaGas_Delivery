@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import Logo from "./assets/Logo.png";
 import api from "./service";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
   const pegarDados = async () => {
@@ -13,7 +13,19 @@ function App() {
     }
   };
 
+  //Verficar se possui Token armazenado
+  const [token, setToken] = useState(false);
+  const VerficarToken = () => {
+    if (!localStorage.getItem("token")) {
+      setToken(false);
+    } else {
+      setToken(true);
+    }
+  };
+
+  //console.log(token);
   useEffect(() => {
+    VerficarToken();
     pegarDados();
   }, []);
 
@@ -42,9 +54,15 @@ function App() {
         </button>
 
         <button className="bg-cyan-500 hover:bg-cyan-600 transition-colors shadow-lg rounded-full py-3 px-12 text-lg font-semibold text-white w-full">
-          <Link to={"/login"} className="text-xl">
-            Seja um parceiro
-          </Link>
+          {token ? (
+            <Link to={"/homeEstabelecimento/6"} className="text-xl">
+              Estabelecimento
+            </Link>
+          ) : (
+            <Link to={"/login"} className="text-xl">
+              Seja um parceiro
+            </Link>
+          )}
         </button>
       </main>
     </div>

@@ -1,10 +1,13 @@
 import { Link, useNavigate } from "react-router-dom";
 import "../ListaEmpresas/style.css";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import api from "../../service";
+import SomeContext from "../../Hook/SomeContext";
 
 const Login = () => {
   const navigate = useNavigate();
+  const context = useContext(SomeContext)
+  console.log("use: " , context)
 
   const [dados, setDados] = useState({});
 
@@ -30,12 +33,11 @@ const Login = () => {
 
       if (token) {
         localStorage.setItem("token", token); // Armazena o token somente se ele existir
-        if (response.status === 200) return navigate(`/HomeEstabelecimento/${response.data.id}`);
+        if (response.status === 200) return navigate(`/HomeEstabelecimento/${context?.id}`);
       } else {
         console.log("Erro: Token não recebido!");
       }
 
-      if (response.status === 200) return navigate("/HomeEstabelecimento");
     } catch (error) {
       console.log(error);
     }

@@ -33,7 +33,9 @@ const UseConntext: FC<UseContextProps> = ({ children }) => {
     decoded = { id: "", nome: "", email: "", cnpj: "" };
   }
 
+
   const { id, nome, email, cnpj } = decoded;
+  console.log("Context :", id, nome, email, cnpj)
 
   return (
     <SomeContext.Provider value={{ id, nome, email, cnpj }}>
