@@ -48,6 +48,8 @@ const ListaEmpresas = () => {
     }
   };
 
+  console.log(data)
+
   useEffect(() => {
     ListarEmpresas();
     ProdutosListar();
