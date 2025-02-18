@@ -11,7 +11,7 @@ import CadastrarProduto from "./pages/CadastrarProduto/index.tsx";
 import EsqueceuSenha from "./pages/EsqueceuSenha/index.tsx";
 import DetalhesPedidos from "./pages/DetalhesPedido/index.tsx";
 import EditarProduto from "./pages/EditarProduto/index.tsx";
-import Error404 from "./pages/Error404";
+//import Error404 from "./pages/Error404";
 import PedidoRealizado from "./pages/PedidoRealizado";
 
 import "./index.css";
@@ -50,10 +50,10 @@ const router = createBrowserRouter([
     path: "/esqueceusenha",
     element: <EsqueceuSenha />,
   },
-  {
-    path: "/error",
-    element: <Error404/>,
-  },
+  // {
+  //   path: "/error",
+  //   element: <Error404/>,
+  // },
   {
     path: "/detalhespedido/:id",
     element: <DetalhesPedidos />,

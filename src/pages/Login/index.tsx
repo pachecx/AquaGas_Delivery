@@ -3,6 +3,7 @@ import "../ListaEmpresas/style.css";
 import { useContext, useState } from "react";
 import api from "../../service";
 import SomeContext from "../../Hook/SomeContext";
+//import Loader from "../../component/load";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -33,7 +34,11 @@ const Login = () => {
 
       if (token) {
         localStorage.setItem("token", token); // Armazena o token somente se ele existir
-        if (response.status === 200) return navigate(`/HomeEstabelecimento/${context?.id}`);
+        
+          if (response.status === 200){
+            
+            navigate(`/HomeEstabelecimento/${context?.id}`);
+          }
       } else {
         console.log("Erro: Token não recebido!");
       }
@@ -52,7 +57,6 @@ const Login = () => {
         <h1 className="text-3xl font-semibold text-center text-gray-800 mb-6">
           Login
         </h1>
-
         <form onSubmit={Logar} className="text-gray-600">
           <label htmlFor="email" className="block text-sm font-medium mb-1">
             Email<span className="text-red-500">*</span>
@@ -64,6 +68,8 @@ const Login = () => {
             type="email"
             className="w-full p-3 border border-gray-300 rounded-lg focus:border-indigo-500 focus:ring focus:ring-indigo-200 transition mb-4"
           />
+          {/* <Loader /> */}
+
           <label htmlFor="password" className="block text-sm font-medium mb-1">
             Senha<span className="text-red-500">*</span>
           </label>

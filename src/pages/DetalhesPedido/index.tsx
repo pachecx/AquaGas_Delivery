@@ -98,7 +98,7 @@ const DetalhesPedidos = () => {
       // console.log("Array :", array)
       //console.log("empresa: ", empresas)
       //if(response.status === 200)
-      if (response.status === 200) navigate("/");
+      //if (response.status === 200) navigate("/");
     } catch (error) {
       console.log(error);
     }

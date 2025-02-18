@@ -72,6 +72,7 @@ const ListaEmpresas = () => {
     );
   });
 
+  console.log("Produtos", filtrarEmpresa)
   return (
     <div className="min-h-screen bg-gradient-to-r from-blue-50 to-blue-100 py-6">
       <header className="mb-8 px-4">

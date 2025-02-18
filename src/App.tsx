@@ -1,9 +1,14 @@
 import { Link } from "react-router-dom";
 import Logo from "./assets/Logo.png";
 import api from "./service";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import SomeContext from "./Hook/SomeContext";
 
 function App() {
+  
+  const Context =  useContext(SomeContext);
+  if(Context)
+  console.log("Contexto da home:",  Context.id)
   const pegarDados = async () => {
     try {
       const response = await api.get(`/home`);
@@ -55,7 +60,7 @@ function App() {
 
         <button className="bg-cyan-500 hover:bg-cyan-600 transition-colors shadow-lg rounded-full py-3 px-12 text-lg font-semibold text-white w-full">
           {token ? (
-            <Link to={"/homeEstabelecimento/6"} className="text-xl">
+            <Link to={`/homeEstabelecimento/${Context?.id}`} className="text-xl">
               Estabelecimento
             </Link>
           ) : (
