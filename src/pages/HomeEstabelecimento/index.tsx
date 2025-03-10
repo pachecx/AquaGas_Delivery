@@ -3,7 +3,7 @@ import "./style.css";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import imgProduto from "../../assets/garrafao.png";
 import imgProdutoGas from "../../assets/Gas-gas.png";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import api from "../../service";
 
 interface PropsProdutos {
@@ -37,7 +37,7 @@ const HomeEstabelecimento = () => {
   const navigate = useNavigate();
   const { id } = useParams();
 
-  const CarregarPerfil = async () => {
+  const CarregarPerfil = useCallback( async () => {
     try {
       const response = await api.get(`/empresa/${id}`);
       const paraArray = response.data;
@@ -46,7 +46,7 @@ const HomeEstabelecimento = () => {
     } catch (error) {
       console.log(error);
     }
-  };
+  }, [id]);
 
   const ProdutosCadastrados = async () => {
     try {
@@ -61,31 +61,24 @@ const HomeEstabelecimento = () => {
     return dados.some((empresa) => empresa.cnpj === produto.cnpj);
   });
 
-  // const DeletarProduto = async () => {
-  //   try {
-  //     const response = await api.delete(`/deletar/produto/$`)
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }
-
-  //console.log("dados:",dados)
-  //console.log(produtos);
-  //console.log(ProdutosDaEmpresa);
+ 
   console.log("FIND:", produtosComEmpresa);
 
-  // const DeletarProduto = async () => {
-  //   try {
-  //     const response = await api.delete(`/deletar/produto/${''}`)
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }
+  const ExcluirProduto = async (idProduto: string) => {
+    try {
+      const response = await api.delete(`/deletar/produto/${idProduto}`);
+      if (response.status === 200) {
+        await ProdutosCadastrados(); // Recarrega a lista sem precisar de window.location.reload()
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     CarregarPerfil();
     ProdutosCadastrados();
-  }, []);
+  }, [CarregarPerfil]);
 
   console.log(dados);
   return (
@@ -168,18 +161,7 @@ const HomeEstabelecimento = () => {
                       </button>
                       <button
                         className="bg-red-500 text-white p-2 rounded-lg font-bold hover:bg-red-400 transition"
-                        onClick={async () => {
-                          try {
-                            const response = await api.delete(
-                              `/deletar/produto/${lista.idprodutos}`
-                            );
-                            if(response.status === (200)){
-                              window.location.reload()
-                            }
-                          } catch (error) {
-                            console.log(error);
-                          }
-                        }}
+                        onClick={() => ExcluirProduto(lista.idprodutos)}
                       >
                         Excluir
                       </button>
