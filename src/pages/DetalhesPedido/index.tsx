@@ -102,7 +102,7 @@ const DetalhesPedidos = () => {
     } catch (error) {
       console.log(error);
     }
-  }, [id, navigate]);
+  }, [id]);
 
   console.log("Ja com id :", empresa.tel);
   // console.log("telefone :", empresa.telefone)

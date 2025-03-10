@@ -36,8 +36,7 @@ const Login = () => {
         localStorage.setItem("token", token); // Armazena o token somente se ele existir
         
           if (response.status === 200){
-            
-            navigate(`/HomeEstabelecimento/${context?.id}`);
+            navigate(`/`);
           }
       } else {
         console.log("Erro: Token não recebido!");
@@ -87,7 +86,7 @@ const Login = () => {
           >
             Esqueceu a senha?
           </Link>
-          <button className="w-full bg-indigo-600 text-white p-3 rounded-lg font-semibold hover:bg-indigo-500 transition">
+          <button type="submit" className="w-full bg-indigo-600 text-white p-3 rounded-lg font-semibold hover:bg-indigo-500 transition">
             Entrar
           </button>
         </form>

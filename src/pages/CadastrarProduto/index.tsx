@@ -46,8 +46,9 @@ const CadastrarProduto = () => {
       }
 
       const response = await api.post(`/cadastrar/produto`, produtos);
+      if(context?.id)
       if (response.status === 200) {
-        navigate(`/HomeEstabelecimento/${id}`);
+        navigate(`/HomeEstabelecimento/${context.id}`);
       } else {
         alert("Produto não cadastrado!");
       }
@@ -55,6 +56,7 @@ const CadastrarProduto = () => {
       console.log(error);
     }
   };
+  console.log(id)
   //console.log(produtos);
   // console.log(context)
   return (
