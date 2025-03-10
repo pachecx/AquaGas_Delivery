@@ -33,7 +33,7 @@ const Login = () => {
 
 
       if (token) {
-        localStorage.setItem("token", token); // Armazena o token somente se ele existir
+        localStorage.setItem("token", token); //Armazena o token somente se ele existir
         
           if (response.status === 200){
             navigate(`/`);
