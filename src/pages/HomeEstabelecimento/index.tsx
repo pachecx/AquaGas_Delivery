@@ -37,31 +37,31 @@ const HomeEstabelecimento = () => {
   const navigate = useNavigate();
   const { id } = useParams();
 
-  const CarregarPerfil = useCallback( async () => {
+  const CarregarPerfil = useCallback(async () => {
     try {
       const response = await api.get(`/empresa/${id}`);
       const paraArray = response.data;
       const ddd = [paraArray];
       setDados(ddd);
+      console.log("endereço: ", ddd)
     } catch (error) {
       console.log(error);
     }
   }, [id]);
 
-  const ProdutosCadastrados = async () => {
+  const ProdutosCadastrados = useCallback(async () => {
     try {
       const response = await api.get(`/produtos/listar`);
       setProdutos(response.data);
     } catch (error) {
       console.log(error);
     }
-  };
+  }, []);
 
   const produtosComEmpresa = produtos.filter((produto) => {
     return dados.some((empresa) => empresa.cnpj === produto.cnpj);
   });
 
- 
   console.log("FIND:", produtosComEmpresa);
 
   const ExcluirProduto = async (idProduto: string) => {
@@ -78,7 +78,7 @@ const HomeEstabelecimento = () => {
   useEffect(() => {
     CarregarPerfil();
     ProdutosCadastrados();
-  }, [CarregarPerfil]);
+  }, [CarregarPerfil, ProdutosCadastrados]);
 
   console.log(dados);
   return (

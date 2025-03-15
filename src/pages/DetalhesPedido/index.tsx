@@ -2,7 +2,6 @@ import { useCallback, useEffect, useState } from "react";
 import agua from "../../assets/garrafao.png";
 import api from "../../service";
 import { useParams } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
 interface PropsEmpresa {
   idusuarios: string;
   nome: string;
@@ -13,7 +12,6 @@ interface PropsEmpresa {
 
 const DetalhesPedidos = () => {
   const { id } = useParams();
-  const navigate = useNavigate();
 
   const [empresa, setEmpresa] = useState<PropsEmpresa>({
     idusuarios: "",
@@ -81,9 +79,6 @@ const DetalhesPedidos = () => {
       *Comentário*: ${pedido.comentario}`;
 
     window.open(`https://wa.me/55${empresa.tel}/?text=${message}`, "_blank");
-
-    // console.log(pedido);
-    // console.log("rodou");
   };
 
   const PegarEmpresa = useCallback(async () => {
@@ -94,18 +89,10 @@ const DetalhesPedidos = () => {
       const { empresas } = array[0];
       setEmpresa(empresas[0]);
 
-      // console.log("data :", data)
-      // console.log("Array :", array)
-      //console.log("empresa: ", empresas)
-      //if(response.status === 200)
-      //if (response.status === 200) navigate("/");
     } catch (error) {
       console.log(error);
     }
   }, [id]);
-
-  console.log("Ja com id :", empresa.tel);
-  // console.log("telefone :", empresa.telefone)
 
   useEffect(() => {
     PegarEmpresa();
