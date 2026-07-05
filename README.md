@@ -1,50 +1,55 @@
-# React + TypeScript + Vite
+# AquaGas Delivery
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Projeto antigo de estudo para pedidos de agua e gas, feito com React + TypeScript + Vite.
 
-Currently, two official plugins are available:
+## O que tem no projeto
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Login e cadastro
+- Lista de empresas
+- Tela de detalhes para fazer pedido
+- Cadastro e edicao de produtos
+- Rotas publicas e privadas
 
-## Expanding the ESLint configuration
+## Tecnologias
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- React
+- TypeScript
+- Vite
+- Tailwind CSS
+- React Router
+- Axios
 
-- Configure the top-level `parserOptions` property like this:
+## Como rodar
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+1. Instalar dependencias:
+
+```bash
+npm install
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+2. Rodar em desenvolvimento:
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+```bash
+npm run dev
 ```
+
+3. Gerar build:
+
+```bash
+npm run build
+```
+
+4. Rodar lint:
+
+```bash
+npm run lint
+```
+
+## Observacoes
+
+- Projeto para fins de estudo/pratica.
+- Ainda pode ter pontos para melhorar em organizacao e padrao de codigo.
+
+## Autor
+
+Matheus (projeto pessoal de estudo)

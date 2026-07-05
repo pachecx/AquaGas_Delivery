@@ -2,7 +2,6 @@ import { useCallback, useEffect, useState } from "react";
 import agua from "../../assets/garrafao.png";
 import api from "../../service";
 import { useParams } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
 interface PropsEmpresa {
   idusuarios: string;
   nome: string;
@@ -13,7 +12,6 @@ interface PropsEmpresa {
 
 const DetalhesPedidos = () => {
   const { id } = useParams();
-  const navigate = useNavigate();
 
   const [empresa, setEmpresa] = useState<PropsEmpresa>({
     idusuarios: "",

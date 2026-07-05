@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import api from "../../service";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -38,14 +38,14 @@ const EditarProduto = () => {
     });
   };
 
-  const pegarProduto = async () => {
+  const pegarProduto = useCallback(async () => {
     try {
       const response = await api.get(`/produtos/listar/${id}`);
       setProdutos(response.data);
     } catch (error) {
       console.log(error);
     }
-  };
+  }, [id]);
 
   //console.log(id)
 
@@ -74,7 +74,7 @@ const EditarProduto = () => {
 
   useEffect(() => {
     pegarProduto();
-  }, []);
+  }, [pegarProduto]);
   //console.log(produtos);
   // console.log(context)
   return (
